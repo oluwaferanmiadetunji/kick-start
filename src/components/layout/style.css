@@ -17,7 +17,15 @@
 	margin-left: 10%;
 }
 .navigation__links {
-	float: right;
+	text-align: right;
+	padding-right: 100px;
+}
+.navigation__item {
+	margin: 0 20px;
+	font-size: 20px;
+}
+.navigation__item:hover {
+	color: red;
 }
 .component {
 	display: flex;

@@ -2,6 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
+import Nav from './Nav';
 import './style.css';
 
 const Layout = (Component) => () => {
@@ -14,7 +15,7 @@ const Layout = (Component) => () => {
 					</Typography>
 				</Grid>
 				<Grid item md={6} lg={6} className='navigation__links'>
-					<Link to='/login'>Login</Link>
+					<Nav />
 				</Grid>
 			</Grid>
 			<Grid className='component'>
