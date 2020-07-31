@@ -1,0 +1,22 @@
+body,
+html {
+	overflow: hidden;
+	background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)), url('../images/bg.jpg');
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	color: white;
+}
+a {
+	color: inherit;
+	text-decoration: none;
+	text-transform: none;
+}
+.MuiOutlinedInput-notchedOutline {
+	border-color: white;
+}
+.PrivateNotchedOutline-root-1.MuiOutlinedInput-notchedOutline,
+.MuiOutlinedInput-root.Mui-focused.MuiOutlinedInput-notchedOutline {
+	border-color: #3f51b5;
+}

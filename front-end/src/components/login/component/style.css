@@ -1,0 +1,21 @@
+.login__form__div {
+	width: 100%;
+	display: flex;
+	padding: 50px;
+}
+.login_text {
+	width: 40%;
+}
+.login__form {
+	width: 60%;
+}
+.login__form form {
+	margin: auto;
+	width: 60%;
+}
+.login_form_field {
+	margin-bottom: 20px;
+}
+.login_form_footer {
+	margin-top: 20px;
+}
