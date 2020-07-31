@@ -13,3 +13,10 @@ a {
 	text-decoration: none;
 	text-transform: none;
 }
+.MuiOutlinedInput-notchedOutline {
+	border-color: white;
+}
+.PrivateNotchedOutline-root-1.MuiOutlinedInput-notchedOutline,
+.MuiOutlinedInput-root.Mui-focused.MuiOutlinedInput-notchedOutline {
+	border-color: #3f51b5;
+}
