@@ -1,15 +1,8 @@
-import { ATTEMPT_REGISTER, TOGGLE_LOADING } from './actionTypes';
+import { REGISTER_USER } from './actionTypes';
 
-const registerUser = (data) => {
-	return {
-		type: ATTEMPT_REGISTER,
-		payload: data,
-	};
-};
-
-const loadingReducer = (value) => ({
-	payload: value,
-	type: TOGGLE_LOADING,
+const registerUser = (data) => ({
+	type: REGISTER_USER,
+	payload: data,
 });
 
-export default { registerUser, loadingReducer };
+export default { registerUser };

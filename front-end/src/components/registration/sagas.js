@@ -1,34 +1,24 @@
-import { takeLatest, put } from 'redux-saga/effects';
+import { takeEvery } from 'redux-saga/effects';
 import { BASE_URL } from './constants';
-import actions from './actions';
-import { ATTEMPT_REGISTER } from './actionTypes';
+import { REGISTER_USER } from './actionTypes';
 
-// Function to register user
-function* registerUser(action) {
-	// make a call to the API to register the user passing the data
-	console.log('Attempt to make saga call');
-	console.log(action);
-	const response = yield fetch(`${BASE_URL}/register`, {
+const signup = function* signup(action) {
+	const response = yield fetch(`${BASE_URL}`, {
 		body: JSON.stringify(action.payload),
-		header: { 'Content-Type': 'application/json' },
+		header: {
+			'Content-Type': 'application/json',
+		},
 		method: 'POST',
 	})
 		.then((res) => res.json())
 		.then((res) => {
 			console.log(res);
-		})
-		.catch(() => {
-			console.log('Error');
 		});
 	console.log(response);
-	// stop loading
-	yield put(actions.loadingReducer(false));
-}
-
-// watched for ATTEMPT_REGISTER action type, it then calls registerUser with the action
+};
 
 function* registerSaga() {
-	yield takeLatest(ATTEMPT_REGISTER, registerUser);
+	yield takeEvery(REGISTER_USER, signup);
 }
 
 export default registerSaga;

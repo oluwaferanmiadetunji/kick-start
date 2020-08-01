@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 // import constants
 import { Gender } from './constants';
 // import the actions
-import actions from '../actions';
+import action from '../actions';
 
 function Form() {
 	// initialize dispatch
@@ -29,8 +29,8 @@ function Form() {
 	// function to submit the form
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		dispatch(actions.loadingReducer(true));
-		dispatch(actions.registerUser({ email, name, phone, password, confirmPassword, gender }));
+		console.log(name, email, phone, password, gender);
+		dispatch(action.registerUser({ name, email, phone, password, gender }));
 	};
 
 	return (
@@ -144,7 +144,7 @@ function Form() {
 						</TextField>
 					</div>
 
-					<Button variant='contained' color='primary' style={{ marginTop: 10 }} size='small'>
+					<Button variant='contained' color='primary' style={{ marginTop: 10 }} size='small' type='submit'>
 						{loading ? <CircularProgress style={{ color: 'white' }} /> : 'Register'}
 					</Button>
 					<div className='register_form_footer'>

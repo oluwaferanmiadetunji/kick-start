@@ -1,12 +1,22 @@
-import { TOGGLE_LOADING } from './actionTypes';
+import { REGISTER_USER } from './actionTypes';
 
 const registerLoadingReducer = (state = false, action) => {
 	switch (action.type) {
-		case TOGGLE_LOADING:
-			return action.payload;
 		default:
 			return state;
 	}
 };
 
-export default { registerLoadingReducer };
+const register = (state = {}, action) => {
+	switch (action.type) {
+		case REGISTER_USER:
+			return {
+				...state,
+				response: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
+export default { registerLoadingReducer, register };

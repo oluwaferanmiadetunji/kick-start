@@ -25,7 +25,6 @@ function Form() {
 							type='email'
 							variant='outlined'
 							fullWidth
-							autofocus
 							InputProps={{ style: { color: 'white', borderColor: 'white !important' } }}
 							InputLabelProps={{ style: { color: 'white', border: 'white' } }}
 						/>
