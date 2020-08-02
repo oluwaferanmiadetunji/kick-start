@@ -11,7 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
 // import constants
 import { Gender } from './constants';
-// import the actions
+// import the redux actions
 import action from '../actions';
 
 function Form() {
@@ -27,16 +27,24 @@ function Form() {
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [gender, setGender] = useState('');
+	const [error, setError] = useState({});
 
+	// set email regular expression
+	const re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+	// function to handle user input on name
 	const handleNameChange = (event) => {
 		setName(event.target.value);
 	};
 
+	// function to handle user input on email
 	const handleEmailChange = (event) => {
 		setEmail(event.target.value);
 	};
 
+	// function to handle user input on phone number
 	const handlePhoneNumberChange = (event) => {
+		// restrict user from adding anything other than numbers
 		const pattern = /^\d+$/;
 		if (pattern.test(event.target.value)) {
 			setPhone(event.target.value);
@@ -46,22 +54,72 @@ function Form() {
 		}
 	};
 
+	// function to handle user input on password
 	const handlePasswordChange = (event) => {
 		setPassword(event.target.value);
 	};
 
+	// function to handle user input on confir password
 	const handleConfirmPasswordChange = (event) => {
 		setConfirmPassword(event.target.value);
 	};
 
+	// function to handle user input on gender
 	const handleGenderChange = (event) => {
 		setGender(event.target.value);
 	};
+
 	// function to submit the form
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		dispatch(action.registerLoading(true));
-		dispatch(action.registerUser({ name, email, phone, password, gender }));
+		setError({});
+
+		// check if name field is empty
+		if (name.trim() === '') {
+			setError({ name: 'You must enter a name!' });
+		}
+
+		// check if email field is empty
+		else if (email.trim() === '') {
+			setError({ email: 'You must enter an email!' });
+		}
+
+		// check if email is a valid email
+		else if (!email.match(re)) {
+			setError({ email: 'You must enter a valid email!' });
+		}
+
+		// check if phone is empty
+		else if (phone.trim() === '') {
+			setError({ phone: 'You must enter a phone number!' });
+		}
+
+		// check if gender is empty
+		else if (gender.trim() === '') {
+			setError({ gender: 'You must select your gender!' });
+		}
+
+		// check if password is empty
+		else if (password.trim() === '') {
+			setError({ password: 'You must enter a password!' });
+		}
+
+		// check if confirm password is empty
+		else if (confirmPassword.trim() === '') {
+			setError({ confirmPassword: 'You must enter a password!' });
+		}
+
+		// check if password and confirm password match
+		else if (password !== confirmPassword) {
+			setError({ password: 'Passwords do not match!', confirmPassword: 'Passwords do not match!' });
+		}
+
+		// proceed with the action
+		else {
+			dispatch(action.registerLoading(true));
+			alert('True');
+			// dispatch(action.registerUser({ name, email, phone, password, gender }));
+		}
 	};
 
 	return (
@@ -71,9 +129,11 @@ function Form() {
 				<p>Sign Up now</p>
 			</div>
 			<div className='register__form'>
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit} noValidate>
 					<div className='register_form_field'>
 						<TextField
+							error={error.name ? true : false}
+							helperText={error.name}
 							id='fullname'
 							label='Full Name'
 							type='text'
@@ -88,6 +148,8 @@ function Form() {
 					</div>
 					<div className='register_form_field'>
 						<TextField
+							error={error.email ? true : false}
+							helperText={error.email}
 							id='email'
 							label='Email'
 							type='email'
@@ -102,6 +164,8 @@ function Form() {
 					</div>
 					<div className='register_form_field'>
 						<TextField
+							error={error.phone ? true : false}
+							helperText={error.phone}
 							id='phone_number'
 							label='Phone Number'
 							type='tel'
@@ -114,36 +178,11 @@ function Form() {
 							onChange={handlePhoneNumberChange}
 						/>
 					</div>
+
 					<div className='register_form_field'>
 						<TextField
-							id='password'
-							type='password'
-							label='Password'
-							variant='outlined'
-							fullWidth
-							size='small'
-							InputProps={{ style: { color: 'white', borderColor: 'white !important' } }}
-							InputLabelProps={{ style: { color: 'white', border: 'white' } }}
-							value={password}
-							onChange={handlePasswordChange}
-						/>
-					</div>
-					<div className='register_form_field'>
-						<TextField
-							id='confirmPassword'
-							type='password'
-							label='Confirm Password'
-							variant='outlined'
-							fullWidth
-							size='small'
-							InputProps={{ style: { color: 'white', borderColor: 'white !important' } }}
-							InputLabelProps={{ style: { color: 'white', border: 'white' } }}
-							value={confirmPassword}
-							onChange={handleConfirmPasswordChange}
-						/>
-					</div>
-					<div className='register_form_field'>
-						<TextField
+						error={error.gender ? true : false}
+						helperText={error.gender}
 							id='gender'
 							select
 							label='Gender'
@@ -161,6 +200,38 @@ function Form() {
 								</MenuItem>
 							))}
 						</TextField>
+					</div>
+					<div className='register_form_field'>
+						<TextField
+							error={error.password ? true : false}
+							helperText={error.password}
+							id='password'
+							type='password'
+							label='Password'
+							variant='outlined'
+							fullWidth
+							size='small'
+							InputProps={{ style: { color: 'white', borderColor: 'white !important' } }}
+							InputLabelProps={{ style: { color: 'white', border: 'white' } }}
+							value={password}
+							onChange={handlePasswordChange}
+						/>
+					</div>
+					<div className='register_form_field'>
+						<TextField
+							error={error.confirmPassword ? true : false}
+							helperText={error.confirmPassword}
+							id='confirmPassword'
+							type='password'
+							label='Confirm Password'
+							variant='outlined'
+							fullWidth
+							size='small'
+							InputProps={{ style: { color: 'white', borderColor: 'white !important' } }}
+							InputLabelProps={{ style: { color: 'white', border: 'white' } }}
+							value={confirmPassword}
+							onChange={handleConfirmPasswordChange}
+						/>
 					</div>
 
 					<Button
