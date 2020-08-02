@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 // import Material UI
 import TextField from '@material-ui/core/TextField';
@@ -19,6 +20,7 @@ function Form() {
 	const dispatch = useDispatch();
 	// get global state variables
 	const loading = useSelector((state) => state.registerLoading);
+	const { status, message } = useSelector((state) => state.registerStatus);
 
 	// initialize component state
 	const [name, setName] = useState('');
@@ -117,12 +119,15 @@ function Form() {
 		// proceed with the action
 		else {
 			dispatch(action.registerLoading(true));
-			alert('True');
-			// dispatch(action.registerUser({ name, email, phone, password, gender }));
+			dispatch(action.registerUser({ name, email, phone, password, gender }));
 		}
 	};
 
-	return (
+	useEffect(() => {}, [message, status]);
+
+	return status ? (
+		<Redirect to='/login' />
+	) : (
 		<div className='register__form__div'>
 			<div className='register_text'>
 				<p>We help bring your projects to life by connecting you with potential Contributors.</p>
@@ -181,8 +186,8 @@ function Form() {
 
 					<div className='register_form_field'>
 						<TextField
-						error={error.gender ? true : false}
-						helperText={error.gender}
+							error={error.gender ? true : false}
+							helperText={error.gender}
 							id='gender'
 							select
 							label='Gender'
@@ -233,6 +238,12 @@ function Form() {
 							onChange={handleConfirmPasswordChange}
 						/>
 					</div>
+
+					{message && (
+						<div>
+							<Typography variant='caption'>{message}</Typography>
+						</div>
+					)}
 
 					<Button
 						variant='contained'

@@ -9,12 +9,12 @@ const registerLoadingReducer = (state = false, action) => {
 	}
 };
 
-const registerStatusReducer = (state = { status: false, message: '', error: {} }, action) => {
+const registerStatusReducer = (state = { status: false, message: '' }, action) => {
 	switch (action.type) {
 		case REGISTER_REQUEST_COMPLETE:
 			return {
 				...state,
-				status: true,
+				status: action.payload.status,
 				message: action.payload.message,
 			};
 		default:
