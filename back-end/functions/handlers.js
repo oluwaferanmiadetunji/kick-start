@@ -1,19 +1,14 @@
-const { db } = require('./admin');
-
-const firebaseConfig = require('./config');
-
-const firebase = require('firebase');
-firebase.initializeApp(firebaseConfig);
+const { db, firebase } = require('./admin');
 
 exports.signup = (req, res) => {
+	const request = JSON.parse(req.body);
 	const newUser = {
-		email: req.body.email,
-		password: req.body.password,
-		name: req.body.name,
-		phone: req.body.phone,
-		gender: req.body.gender,
+		email: request.email,
+		password: request.password,
+		name: request.name,
+		phone: request.phone,
+		gender: request.gender,
 	};
-
 	let token, userId;
 	db.doc(`/users/${newUser.email}`)
 		.get()
@@ -50,6 +45,7 @@ exports.signup = (req, res) => {
 			});
 		})
 		.catch((err) => {
+			console.log(err);
 			if (err.code === 'auth/email-already-in-use') {
 				return res.status(400).json({ status: 'error', message: 'Email is already in use' });
 			} else {

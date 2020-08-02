@@ -1,7 +1,14 @@
 const admin = require('firebase-admin');
+const FSA = require('./FSA.json');
+const firebaseConfig = require('./config');
+const firebase = require('firebase');
 
-admin.initializeApp();
+admin.initializeApp({
+	credential: admin.credential.cert(FSA),
+});
+
+firebase.initializeApp(firebaseConfig);
 
 const db = admin.firestore();
 
-module.exports = { admin, db };
+module.exports = { admin, db, firebase };

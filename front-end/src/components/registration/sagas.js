@@ -4,9 +4,16 @@ import { TRY_REGISTER, REGISTER_REQUEST_COMPLETE } from './actionTypes';
 import actions from './actions';
 
 const signup = function* signup(action) {
-	const response = yield call(fetch, `${BASE_URL}/signup`);
+	const response = yield fetch(`${BASE_URL}/signup`, {
+		body: JSON.stringify(action.payload),
+		header: {
+			'Content-Type': 'application/json',
+		},
+		method: 'POST',
+	});
 	const data = yield response.json();
 	yield put({ type: REGISTER_REQUEST_COMPLETE, payload: data });
+	console.log(data);
 	yield put(actions.registerLoading(false));
 };
 

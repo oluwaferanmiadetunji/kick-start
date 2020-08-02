@@ -106,6 +106,13 @@ function Form() {
 			setError({ password: 'You must enter a password!' });
 		}
 
+		// check if password length is at least 6 characters long
+		else if (password.length < 6) {
+			setError({
+				password: `Password is currently ${password.length} characters long. It must be at least 6 characters long`,
+			});
+		}
+
 		// check if confirm password is empty
 		else if (confirmPassword.trim() === '') {
 			setError({ confirmPassword: 'You must enter a password!' });
@@ -125,7 +132,7 @@ function Form() {
 
 	useEffect(() => {}, [message, status]);
 
-	return status ? (
+	return status === 'success' ? (
 		<Redirect to='/login' />
 	) : (
 		<div className='register__form__div'>
@@ -241,7 +248,9 @@ function Form() {
 
 					{message && (
 						<div>
-							<Typography variant='caption'>{message}</Typography>
+							<Typography variant='caption' style={{ color: 'red' }}>
+								{message}
+							</Typography>
 						</div>
 					)}
 
