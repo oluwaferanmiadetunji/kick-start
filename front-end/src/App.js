@@ -11,6 +11,7 @@ import rootSaga from './rootSaga';
 import allReducers from './rootReducer';
 // set up middleware to watch actions and reducers
 const sagaMiddleware = createSagaMiddleware();
+const middleware = [sagaMiddleware];
 
 const initialState = {};
 
@@ -19,7 +20,7 @@ const store = createStore(
 	allReducers,
 	initialState,
 	// wrap all of them in a compose in order to wrap them as a single argument
-	compose(applyMiddleware(sagaMiddleware), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+	compose(applyMiddleware(...middleware), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 );
 
 // run the middleware for the rootsaga

@@ -3,7 +3,7 @@ import { reducers as registrationReducer } from './components/registration';
 
 const allReducers = combineReducers({
 	registerLoading: registrationReducer.registerLoadingReducer,
-	register: registrationReducer.register,
+	registerStatus: registrationReducer.registerStatusReducer,
 });
 
 export default allReducers;

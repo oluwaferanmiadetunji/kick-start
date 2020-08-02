@@ -18,7 +18,8 @@ function Form() {
 	// initialize dispatch
 	const dispatch = useDispatch();
 	// get global state variables
-	const { loading } = useSelector((state) => state.registerLoading);
+	const loading = useSelector((state) => state.registerLoading);
+
 	// initialize component state
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
@@ -26,10 +27,40 @@ function Form() {
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [gender, setGender] = useState('');
+
+	const handleNameChange = (event) => {
+		setName(event.target.value);
+	};
+
+	const handleEmailChange = (event) => {
+		setEmail(event.target.value);
+	};
+
+	const handlePhoneNumberChange = (event) => {
+		const pattern = /^\d+$/;
+		if (pattern.test(event.target.value)) {
+			setPhone(event.target.value);
+		}
+		if (phone.length === 1 && event.target.value === '') {
+			setPhone(event.target.value);
+		}
+	};
+
+	const handlePasswordChange = (event) => {
+		setPassword(event.target.value);
+	};
+
+	const handleConfirmPasswordChange = (event) => {
+		setConfirmPassword(event.target.value);
+	};
+
+	const handleGenderChange = (event) => {
+		setGender(event.target.value);
+	};
 	// function to submit the form
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		console.log(name, email, phone, password, gender);
+		dispatch(action.registerLoading(true));
 		dispatch(action.registerUser({ name, email, phone, password, gender }));
 	};
 
@@ -52,9 +83,7 @@ function Form() {
 							InputProps={{ style: { color: 'white', borderColor: 'white !important' } }}
 							InputLabelProps={{ style: { color: 'white', border: 'white' } }}
 							value={name}
-							onChange={(event) => {
-								setName(event.target.value);
-							}}
+							onChange={handleNameChange}
 						/>
 					</div>
 					<div className='register_form_field'>
@@ -68,9 +97,7 @@ function Form() {
 							InputProps={{ style: { color: 'white', borderColor: 'white !important' } }}
 							InputLabelProps={{ style: { color: 'white', border: 'white' } }}
 							value={email}
-							onChange={(event) => {
-								setEmail(event.target.value);
-							}}
+							onChange={handleEmailChange}
 						/>
 					</div>
 					<div className='register_form_field'>
@@ -84,9 +111,7 @@ function Form() {
 							InputProps={{ style: { color: 'white', borderColor: 'white !important' } }}
 							InputLabelProps={{ style: { color: 'white', border: 'white' } }}
 							value={phone}
-							onChange={(event) => {
-								setPhone(event.target.value);
-							}}
+							onChange={handlePhoneNumberChange}
 						/>
 					</div>
 					<div className='register_form_field'>
@@ -100,9 +125,7 @@ function Form() {
 							InputProps={{ style: { color: 'white', borderColor: 'white !important' } }}
 							InputLabelProps={{ style: { color: 'white', border: 'white' } }}
 							value={password}
-							onChange={(event) => {
-								setPassword(event.target.value);
-							}}
+							onChange={handlePasswordChange}
 						/>
 					</div>
 					<div className='register_form_field'>
@@ -116,9 +139,7 @@ function Form() {
 							InputProps={{ style: { color: 'white', borderColor: 'white !important' } }}
 							InputLabelProps={{ style: { color: 'white', border: 'white' } }}
 							value={confirmPassword}
-							onChange={(event) => {
-								setConfirmPassword(event.target.value);
-							}}
+							onChange={handleConfirmPasswordChange}
 						/>
 					</div>
 					<div className='register_form_field'>
@@ -127,9 +148,7 @@ function Form() {
 							select
 							label='Gender'
 							value={gender}
-							onChange={(event) => {
-								setGender(event.target.value);
-							}}
+							onChange={handleGenderChange}
 							variant='outlined'
 							fullWidth
 							size='small'
@@ -144,7 +163,14 @@ function Form() {
 						</TextField>
 					</div>
 
-					<Button variant='contained' color='primary' style={{ marginTop: 10 }} size='small' type='submit'>
+					<Button
+						variant='contained'
+						color='primary'
+						style={{ marginTop: 10, background: '#3f51b5', color: 'white' }}
+						size='small'
+						type='submit'
+						disabled={loading}
+					>
 						{loading ? <CircularProgress style={{ color: 'white' }} /> : 'Register'}
 					</Button>
 					<div className='register_form_footer'>

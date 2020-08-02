@@ -1,4 +1,4 @@
-const { admin, db } = require('./admin');
+const { db } = require('./admin');
 
 const firebaseConfig = require('./config');
 
@@ -44,20 +44,16 @@ exports.signup = (req, res) => {
 		})
 		.then(() => {
 			return res.status(201).json({
-				token: token,
+				status: 'success',
+				token,
 				message: 'User created successfully',
 			});
 		})
 		.catch((err) => {
-			console.log(err);
 			if (err.code === 'auth/email-already-in-use') {
-				return res.status(400).json({
-					email: 'Email is already in use',
-				});
+				return res.status(400).json({ status: 'error', message: 'Email is already in use' });
 			} else {
-				return res.status(500).json({
-					general: 'Something went wrong! Please try again',
-				});
+				return res.status(500).json({ status: 'error', message: 'Something went wrong! Please try again' });
 			}
 		});
 };
@@ -75,18 +71,13 @@ exports.login = (req, res) => {
 			return data.user.getIdToken();
 		})
 		.then((token) => {
-			return res.json({ token });
+			return res.status(200).json({ token });
 		})
 		.catch((err) => {
-			console.log(err);
 			if (err.code === 'auth/wrong-password' || err.code === 'auth/user-not-found') {
-				return res.status(400).json({
-					general: 'Wrong credentials! Please, try again',
-				});
+				return res.status(400).json({ status: 'error', message: 'Wrong credentials! Please, try again' });
 			} else {
-				return res.status(500).json({
-					general: 'Something went wrong! Please try again',
-				});
+				return res.status(500).json({ status: 'error', message: 'Something went wrong! Please try again' });
 			}
 		});
 };

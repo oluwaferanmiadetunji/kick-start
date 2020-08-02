@@ -1,22 +1,25 @@
-import { REGISTER_USER } from './actionTypes';
+import { REGISTER_LOADING, REGISTER_REQUEST_COMPLETE } from './actionTypes';
 
 const registerLoadingReducer = (state = false, action) => {
 	switch (action.type) {
+		case REGISTER_LOADING:
+			return action.payload;
 		default:
 			return state;
 	}
 };
 
-const register = (state = {}, action) => {
+const registerStatusReducer = (state = { status: false, message: '', error: {} }, action) => {
 	switch (action.type) {
-		case REGISTER_USER:
+		case REGISTER_REQUEST_COMPLETE:
 			return {
 				...state,
-				response: action.payload,
+				status: true,
+				message: action.payload.message,
 			};
 		default:
 			return state;
 	}
 };
 
-export default { registerLoadingReducer, register };
+export default { registerLoadingReducer, registerStatusReducer };

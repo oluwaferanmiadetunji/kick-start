@@ -1,8 +1,13 @@
-import { REGISTER_USER } from './actionTypes';
+import { TRY_REGISTER, REGISTER_LOADING } from './actionTypes';
 
 const registerUser = (data) => ({
-	type: REGISTER_USER,
+	type: TRY_REGISTER,
 	payload: data,
 });
 
-export default { registerUser };
+const registerLoading = (value) => ({
+	payload: value,
+	type: REGISTER_LOADING,
+});
+
+export default { registerUser, registerLoading };
