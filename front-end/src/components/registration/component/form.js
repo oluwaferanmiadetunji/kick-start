@@ -20,7 +20,8 @@ function Form() {
 	const dispatch = useDispatch();
 	// get global state variables
 	const loading = useSelector((state) => state.registerLoading);
-	const { status, message } = useSelector((state) => state.registerStatus);
+	const status = useSelector((state) => state.registerStatus);
+	const message = useSelector((state) => state.registerMessage);
 
 	// initialize component state
 	const [name, setName] = useState('');

@@ -16,7 +16,7 @@ import allReducers from './rootReducer';
 const persistConfig = {
 	key: 'root',
 	storage,
-	blacklist: ['registerLoading'],
+	whitelist: [''],
 };
 
 const persistedReducer = persistReducer(persistConfig, allReducers);

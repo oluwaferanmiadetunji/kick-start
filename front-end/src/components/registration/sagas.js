@@ -13,7 +13,6 @@ const signup = function* signup(action) {
 	});
 	const data = yield response.json();
 	yield put({ type: REGISTER_REQUEST_COMPLETE, payload: data });
-	console.log(data);
 	yield put(actions.registerLoading(false));
 };
 

@@ -9,17 +9,22 @@ const registerLoadingReducer = (state = false, action) => {
 	}
 };
 
-const registerStatusReducer = (state = { status: '', message: '' }, action) => {
+const registerStatusReducer = (state = '', action) => {
 	switch (action.type) {
 		case REGISTER_REQUEST_COMPLETE:
-			return {
-				...state,
-				status: action.payload.status,
-				message: action.payload.message,
-			};
+			return action.payload.status;
 		default:
 			return state;
 	}
 };
 
-export default { registerLoadingReducer, registerStatusReducer };
+const registerMessageReducer = (state = '', action) => {
+	switch (action.type) {
+		case REGISTER_REQUEST_COMPLETE:
+			return action.payload.message;
+		default:
+			return state;
+	}
+};
+
+export default { registerLoadingReducer, registerStatusReducer, registerMessageReducer };
