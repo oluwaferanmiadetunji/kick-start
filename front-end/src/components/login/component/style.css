@@ -5,6 +5,8 @@
 }
 .login_text {
 	width: 40%;
+	vertical-align: middle;
+	margin-top: 10%;
 }
 .login__form {
 	width: 60%;
@@ -15,7 +17,12 @@
 }
 .login_form_field {
 	margin-bottom: 20px;
+	background: rgb(0, 0, 0, 0.6);
 }
 .login_form_footer {
 	margin-top: 20px;
+}
+.MuiList-root.MuiMenu-list.MuiList-padding {
+	background: #3f51b5;
+	color: white;
 }

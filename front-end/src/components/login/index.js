@@ -1,4 +1,5 @@
 import components from './component';
-import { test } from './sagas';
+import saga from './sagas';
+import reducers from './reducers';
 
-export { components, test };
+export { components, saga, reducers };

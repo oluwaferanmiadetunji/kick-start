@@ -45,7 +45,6 @@ exports.signup = (req, res) => {
 			});
 		})
 		.catch((err) => {
-			console.log(err);
 			if (err.code === 'auth/email-already-in-use') {
 				return res.status(400).json({ status: 'error', message: 'Email is already in use' });
 			} else {
