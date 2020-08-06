@@ -1,4 +1,4 @@
-import { TRY_LOGIN, LOGIN_LOADING, USER_AUTHENTICATED, LOGIN_REQUEST_COMPLETE } from './actionTypes';
+import {TRY_LOGIN, LOGIN_LOADING, USER_AUTHENTICATED, LOGIN_REQUEST_COMPLETE} from './actionTypes';
 
 const loginUser = (data) => ({
 	type: TRY_LOGIN,
@@ -20,4 +20,4 @@ const clearMessage = () => ({
 	type: LOGIN_REQUEST_COMPLETE,
 });
 
-export default { loginUser, loginLoading, isLogged, clearMessage };
+export default {loginUser, loginLoading, isLogged, clearMessage};

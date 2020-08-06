@@ -1,4 +1,4 @@
-import { LOGIN_LOADING, LOGIN_REQUEST_COMPLETE, USER_AUTHENTICATED } from './actionTypes';
+import {LOGIN_LOADING, LOGIN_REQUEST_COMPLETE, USER_AUTHENTICATED, USER_UNAUTHENTICATED} from './actionTypes';
 
 const loginLoadingReducer = (state = false, action) => {
 	switch (action.type) {
@@ -21,10 +21,10 @@ const loginMessageReducer = (state = '', action) => {
 const authReducer = (state = false, action) => {
 	switch (action.type) {
 		case USER_AUTHENTICATED:
-			return true;
+			return action.payload;
 		default:
 			return state;
 	}
 };
 
-export default { loginLoadingReducer, loginMessageReducer, authReducer };
+export default {loginLoadingReducer, loginMessageReducer, authReducer};
