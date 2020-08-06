@@ -1,13 +1,23 @@
-import { TRY_REGISTER, REGISTER_LOADING } from './actionTypes';
+import { TRY_LOGIN, LOGIN_LOADING, USER_AUTHENTICATED, LOGIN_REQUEST_COMPLETE } from './actionTypes';
 
-const registerUser = (data) => ({
-	type: TRY_REGISTER,
+const loginUser = (data) => ({
+	type: TRY_LOGIN,
 	payload: data,
 });
 
-const registerLoading = (value) => ({
+const loginLoading = (value) => ({
 	payload: value,
-	type: REGISTER_LOADING,
+	type: LOGIN_LOADING,
 });
 
-export default { registerUser, registerLoading };
+const isLogged = (value) => ({
+	payload: value,
+	type: USER_AUTHENTICATED,
+});
+
+const clearMessage = () => ({
+	payload: '',
+	type: LOGIN_REQUEST_COMPLETE,
+});
+
+export default { loginUser, loginLoading, isLogged, clearMessage };

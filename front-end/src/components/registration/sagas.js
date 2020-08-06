@@ -1,5 +1,5 @@
-import { put, call, takeLatest } from 'redux-saga/effects';
-import { BASE_URL } from './constants';
+import { put, takeLatest } from 'redux-saga/effects';
+import { BASE_URL } from '../../constant';
 import { TRY_REGISTER, REGISTER_REQUEST_COMPLETE } from './actionTypes';
 import actions from './actions';
 

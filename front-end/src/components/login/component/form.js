@@ -7,7 +7,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
-import MenuItem from '@material-ui/core/MenuItem';
 
 import { Link } from 'react-router-dom';
 // import the redux actions
@@ -17,9 +16,9 @@ function Form() {
 	// initialize dispatch
 	const dispatch = useDispatch();
 	// get global state variables
-	const loading = useSelector((state) => state.registerLoading);
-	const status = useSelector((state) => state.registerStatus);
-	const message = useSelector((state) => state.registerMessage);
+	const loading = useSelector((state) => state.loginLoading);
+	const isLoggedIn = useSelector((state) => state.isUserLoggedIn);
+	const message = useSelector((state) => state.loginMessage);
 
 	// initialize component state
 	const [email, setEmail] = useState('');
@@ -43,6 +42,7 @@ function Form() {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		setError({});
+		dispatch(action.clearMessage());
 
 		// check if email field is empty
 		if (email.trim() === '') {
@@ -61,20 +61,20 @@ function Form() {
 
 		// proceed with the action
 		else {
-			dispatch(action.registerLoading(true));
-			dispatch(action.registerUser({ email, password }));
+			dispatch(action.loginLoading(true));
+			dispatch(action.loginUser({ email, password }));
 		}
 	};
 
-	useEffect(() => {}, [message, status]);
+	useEffect(() => {}, [message, isLoggedIn]);
 
-	return status === 'success' ? (
-		<Redirect to='/login' />
+	return isLoggedIn ? (
+		<Redirect to='/' />
 	) : (
 		<div className='login__form__div'>
 			<div className='login_text'>
 				<p>We help bring your projects to life by connecting you with potential Contributors.</p>
-				<p>Sign Up now</p>
+				<p>Sign In now</p>
 			</div>
 			<div className='login__form'>
 				<form onSubmit={handleSubmit} noValidate>

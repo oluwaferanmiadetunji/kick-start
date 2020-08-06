@@ -1,10 +1,10 @@
-import { put, call, takeLatest } from 'redux-saga/effects';
-import { BASE_URL } from './constants';
-import { TRY_REGISTER, REGISTER_REQUEST_COMPLETE } from './actionTypes';
+import { put, takeLatest } from 'redux-saga/effects';
+import { BASE_URL } from '../../constant';
+import { TRY_LOGIN, LOGIN_REQUEST_COMPLETE } from './actionTypes';
 import actions from './actions';
 
-const signup = function* signup(action) {
-	const response = yield fetch(`${BASE_URL}/signup`, {
+const login = function* login(action) {
+	const response = yield fetch(`${BASE_URL}/login`, {
 		body: JSON.stringify(action.payload),
 		header: {
 			'Content-Type': 'application/json',
@@ -12,12 +12,13 @@ const signup = function* signup(action) {
 		method: 'POST',
 	});
 	const data = yield response.json();
-	yield put({ type: REGISTER_REQUEST_COMPLETE, payload: data });
-	yield put(actions.registerLoading(false));
+	yield put({ type: LOGIN_REQUEST_COMPLETE, payload: data.message });
+	if (data.status === 'success') yield put(actions.isLogged(true));
+	yield put(actions.loginLoading(false));
 };
 
-function* registerSaga() {
-	yield takeLatest(TRY_REGISTER, signup);
+function* loginSaga() {
+	yield takeLatest(TRY_LOGIN, login);
 }
 
-export default registerSaga;
+export default loginSaga;

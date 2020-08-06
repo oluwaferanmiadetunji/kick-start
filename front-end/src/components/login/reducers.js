@@ -1,30 +1,30 @@
-import { REGISTER_LOADING, REGISTER_REQUEST_COMPLETE } from './actionTypes';
+import { LOGIN_LOADING, LOGIN_REQUEST_COMPLETE, USER_AUTHENTICATED } from './actionTypes';
 
-const registerLoadingReducer = (state = false, action) => {
+const loginLoadingReducer = (state = false, action) => {
 	switch (action.type) {
-		case REGISTER_LOADING:
+		case LOGIN_LOADING:
 			return action.payload;
 		default:
 			return state;
 	}
 };
 
-const registerStatusReducer = (state = '', action) => {
+const loginMessageReducer = (state = '', action) => {
 	switch (action.type) {
-		case REGISTER_REQUEST_COMPLETE:
-			return action.payload.status;
+		case LOGIN_REQUEST_COMPLETE:
+			return action.payload;
 		default:
 			return state;
 	}
 };
 
-const registerMessageReducer = (state = '', action) => {
+const authReducer = (state = false, action) => {
 	switch (action.type) {
-		case REGISTER_REQUEST_COMPLETE:
-			return action.payload.message;
+		case USER_AUTHENTICATED:
+			return true;
 		default:
 			return state;
 	}
 };
 
-export default { registerLoadingReducer, registerStatusReducer, registerMessageReducer };
+export default { loginLoadingReducer, loginMessageReducer, authReducer };

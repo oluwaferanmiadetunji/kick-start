@@ -54,9 +54,10 @@ exports.signup = (req, res) => {
 };
 
 exports.login = (req, res) => {
+	const request = JSON.parse(req.body);
 	const user = {
-		email: req.body.email,
-		password: req.body.password,
+		email: request.email,
+		password: request.password,
 	};
 
 	firebase
@@ -66,7 +67,7 @@ exports.login = (req, res) => {
 			return data.user.getIdToken();
 		})
 		.then((token) => {
-			return res.status(200).json({ token });
+			return res.status(200).json({ status: 'success', token, message: 'User logged in' });
 		})
 		.catch((err) => {
 			if (err.code === 'auth/wrong-password' || err.code === 'auth/user-not-found') {
