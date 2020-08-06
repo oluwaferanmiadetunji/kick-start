@@ -1,6 +1,6 @@
-import { put, takeLatest } from 'redux-saga/effects';
-import { BASE_URL } from '../../constant';
-import { TRY_LOGIN, LOGIN_REQUEST_COMPLETE } from './actionTypes';
+import {put, takeLatest} from 'redux-saga/effects';
+import {BASE_URL} from '../../constant';
+import {TRY_LOGIN, LOGIN_REQUEST_COMPLETE} from './actionTypes';
 import actions from './actions';
 
 const login = function* login(action) {
@@ -12,8 +12,11 @@ const login = function* login(action) {
 		method: 'POST',
 	});
 	const data = yield response.json();
-	yield put({ type: LOGIN_REQUEST_COMPLETE, payload: data.message });
-	if (data.status === 'success') yield put(actions.isLogged(true));
+	yield put({type: LOGIN_REQUEST_COMPLETE, payload: data.message});
+	if (data.status === 'success') {
+		localStorage.setItem('Token', data.token);
+		yield put(actions.isLogged(true));
+	}
 	yield put(actions.loginLoading(false));
 };
 

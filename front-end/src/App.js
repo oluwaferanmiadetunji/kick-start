@@ -16,7 +16,7 @@ import allReducers from './rootReducer';
 const persistConfig = {
 	key: 'root',
 	storage,
-	whitelist: [''],
+	whitelist: ['isUserLoggedIn'],
 };
 
 const persistedReducer = persistReducer(persistConfig, allReducers);
