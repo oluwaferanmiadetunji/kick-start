@@ -44,13 +44,9 @@ if (token) {
 	const decoded = jwtDecode(token);
 	if (decoded.exp * 1000 < Date.now()) {
 		store.dispatch(actions.isLogged(false));
-		window.location.href = '/login';
 	} else {
 		store.dispatch(actions.isLogged(true));
 	}
-} else {
-	store.dispatch(actions.isLogged(false));
-	window.location.href = '/login';
 }
 
 const App = () => {

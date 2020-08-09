@@ -1,4 +1,4 @@
-import {LOGIN_LOADING, LOGIN_REQUEST_COMPLETE, USER_AUTHENTICATED, USER_UNAUTHENTICATED} from './actionTypes';
+import {LOGIN_LOADING, LOGIN_REQUEST_COMPLETE, USER_AUTHENTICATED} from './actionTypes';
 
 const loginLoadingReducer = (state = false, action) => {
 	switch (action.type) {
