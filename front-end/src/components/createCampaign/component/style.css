@@ -1,0 +1,9 @@
+.create__form {
+	width: 40%;
+	padding: 50px;
+	margin: auto;
+}
+.form_field {
+	margin-bottom: 20px;
+	background: rgb(0, 0, 0, 0.6);
+}

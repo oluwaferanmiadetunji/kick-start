@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 // import Material UI
 import TextField from '@material-ui/core/TextField';
@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 // import the redux actions
 import action from '../actions';
 
@@ -46,23 +46,23 @@ function Form() {
 
 		// check if email field is empty
 		if (email.trim() === '') {
-			setError({ email: 'You must enter an email!' });
+			setError({email: 'You must enter an email!'});
 		}
 
 		// check if email is a valid email
 		else if (!email.match(re)) {
-			setError({ email: 'You must enter a valid email!' });
+			setError({email: 'You must enter a valid email!'});
 		}
 
 		// check if password is empty
 		else if (password.trim() === '') {
-			setError({ password: 'You must enter a password!' });
+			setError({password: 'You must enter a password!'});
 		}
 
 		// proceed with the action
 		else {
 			dispatch(action.loginLoading(true));
-			dispatch(action.loginUser({ email, password }));
+			dispatch(action.loginUser({email, password}));
 		}
 	};
 
@@ -88,8 +88,8 @@ function Form() {
 							variant='outlined'
 							fullWidth
 							size='small'
-							InputProps={{ style: { color: 'white', borderColor: 'white !important' } }}
-							InputLabelProps={{ style: { color: 'white', border: 'white' } }}
+							InputProps={{style: {color: 'white', borderColor: 'white !important'}}}
+							InputLabelProps={{style: {color: 'white', border: 'white'}}}
 							value={email}
 							onChange={handleEmailChange}
 						/>
@@ -105,8 +105,8 @@ function Form() {
 							variant='outlined'
 							fullWidth
 							size='small'
-							InputProps={{ style: { color: 'white', borderColor: 'white !important' } }}
-							InputLabelProps={{ style: { color: 'white', border: 'white' } }}
+							InputProps={{style: {color: 'white', borderColor: 'white !important'}}}
+							InputLabelProps={{style: {color: 'white', border: 'white'}}}
 							value={password}
 							onChange={handlePasswordChange}
 						/>
@@ -114,7 +114,7 @@ function Form() {
 
 					{message && (
 						<div>
-							<Typography variant='caption' style={{ color: 'red' }}>
+							<Typography variant='caption' style={{color: 'red'}}>
 								{message}
 							</Typography>
 						</div>
@@ -123,23 +123,23 @@ function Form() {
 					<Button
 						variant='contained'
 						color='primary'
-						style={{ marginTop: 10, background: '#3f51b5', color: 'white' }}
+						style={{marginTop: 10, background: '#3f51b5', color: 'white'}}
 						size='small'
 						type='submit'
 						disabled={loading}
 					>
-						{loading ? <CircularProgress style={{ color: 'white' }} /> : 'Login'}
+						{loading ? <CircularProgress style={{color: 'white'}} /> : 'Login'}
 					</Button>
 					<div className='login_form_footer'>
 						<Typography>
 							Don't have an account ?&nbsp;
-							<Link to='/register' style={{ color: 'red' }}>
+							<Link to='/register' style={{color: 'red'}}>
 								Click here
 							</Link>
 						</Typography>
 						<Typography>
 							Forgot password ?&nbsp;
-							<Link to='/reset' style={{ color: 'red' }}>
+							<Link to='/reset' style={{color: 'red'}}>
 								Click here
 							</Link>
 						</Typography>
