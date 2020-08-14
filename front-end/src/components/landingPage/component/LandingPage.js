@@ -10,16 +10,16 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import factory from '../../../web3/factory';
 
 const LandingPage = () => {
-  const [campaigns, setCampaigns] = useState([]);
+	const [campaigns, setCampaigns] = useState([]);
 
-	useEffect(() => {
-		async function getAllCampaigns() {
-      const AllCampaigns = await factory.methods.getDeployedCampaigns().call();
-      console.log(AllCampaigns);
-			setCampaigns(AllCampaigns);
-		}
-		getAllCampaigns();
-	}, []);
+	// useEffect(() => {
+	// 	async function getAllCampaigns() {
+	//     const AllCampaigns = await factory.methods.getDeployedCampaigns().call();
+	//     console.log(AllCampaigns);
+	// 		// setCampaigns(AllCampaigns);
+	// 	}
+	// 	getAllCampaigns();
+	// }, []);
 
 	return (
 		<Grid container id='container' spacing={4}>

@@ -55,19 +55,25 @@ exports.signup = (req, res) => {
 
 exports.login = (req, res) => {
 	const request = JSON.parse(req.body);
+	// const request = req.body;
 	const user = {
 		email: request.email,
 		password: request.password,
 	};
-
+	let token, name;
 	firebase
 		.auth()
 		.signInWithEmailAndPassword(user.email, user.password)
 		.then((data) => {
 			return data.user.getIdToken();
 		})
-		.then((token) => {
-			return res.status(200).json({status: 'success', token, message: 'User logged in'});
+		.then((IDToken) => {
+			token = IDToken;
+			return db.doc(`/users/${user.email}`).get();
+		})
+		.then((doc) => {
+			name = doc.data().name;
+			return res.status(200).json({status: 'success', token, name, message: 'User logged in'});
 		})
 		.catch((err) => {
 			if (err.code === 'auth/wrong-password' || err.code === 'auth/user-not-found') {

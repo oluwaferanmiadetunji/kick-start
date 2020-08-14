@@ -17,6 +17,9 @@ const login = function* login(action) {
 		localStorage.setItem('Token', data.token);
 		yield put({type: SET_NAME, payload: data.name});
 		yield put(actions.isLogged(true));
+	} else {
+		yield put(actions.isLogged(false));
+		yield put(actions.loginLoading(false));
 	}
 	yield put(actions.loginLoading(false));
 };

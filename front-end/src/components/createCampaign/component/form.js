@@ -23,6 +23,7 @@ function Form() {
 		event.preventDefault();
 		setLoading(true);
 		setErrorMessage('');
+
 		try {
 			await window.ethereum.enable();
 			const accounts = await web3.eth.getAccounts();
@@ -30,10 +31,17 @@ function Form() {
 			setLoading(false);
 			history.push('/');
 		} catch (err) {
-			setErrorMessage(err);
+			if (err.message === 'MetaMask Tx Signature: User denied transaction signature.') {
+				setErrorMessage('You cancelled the transaction');
+			} else {
+				setErrorMessage('Oops! Something went wrong');
+				console.log(err.message);
+			}
+
 			setLoading(false);
 		}
 	};
+
 	return (
 		<div className='create__form'>
 			<form onSubmit={handleSubmit} noValidate>
