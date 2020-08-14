@@ -1,0 +1,3 @@
+export const GET_ALL_CAMPAIGNS = 'GET_ALL_CAMPAIGNS';
+export const SET_ALL_CAMPAIGNS = 'SET_ALL_CAMPAIGNS';
+export const LOADING = 'LOADING';

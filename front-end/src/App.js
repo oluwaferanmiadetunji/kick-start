@@ -19,7 +19,7 @@ import {actions} from './components/login';
 const persistConfig = {
 	key: 'root',
 	storage,
-	whitelist: ['name'],
+	whitelist: ['name', 'campaigns'],
 };
 
 const persistedReducer = persistReducer(persistConfig, allReducers);
