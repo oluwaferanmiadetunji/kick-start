@@ -44,7 +44,7 @@ const LandingPage = () => {
 								</Typography>
 							</div>
 							<Button style={{background: 'red', color: 'white', marginTop: 10, textAlign: 'center'}} size='small'>
-								<Link to='/'>
+								<Link to={`/campaigns/${campaign}`}>
 									<KeyboardArrowRightIcon />
 								</Link>
 							</Button>

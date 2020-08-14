@@ -4,6 +4,7 @@ import {components as LoginPage} from './components/login';
 import {components as LandingPage} from './components/landingPage';
 import {components as RegistrationPage} from './components/registration';
 import {components as CreateCampaingPage} from './components/createCampaign';
+import {components as SingleCampaign} from './components/campaign';
 
 export const Routes = () => (
 	<Router>
@@ -11,6 +12,7 @@ export const Routes = () => (
 			<Route exact path='/login' component={LoginPage} />
 			<Route exact path='/register' component={RegistrationPage} />
 			<Route exact path='/campaigns/new' component={CreateCampaingPage} />
+			<Route exact path='/campaigns/:address' component={SingleCampaign} />
 			<Route exact path='/' component={LandingPage} />
 		</Switch>
 	</Router>
