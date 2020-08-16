@@ -8,10 +8,10 @@ const Layout = (Component) => () => {
 	return (
 		<div className='layout'>
 			<Grid className='header'>
-				<Grid item md={6} lg={6} id='logo'>
+				<Grid item md={6} lg={6} xs={12} sm={12} id='logo'>
 					<Typography variant='h4'>Kick Start</Typography>
 				</Grid>
-				<Grid item md={6} lg={6} className='navigation__links'>
+				<Grid item md={6} lg={6} xs={12} sm={12} className='navigation__links'>
 					<Nav />
 				</Grid>
 			</Grid>
