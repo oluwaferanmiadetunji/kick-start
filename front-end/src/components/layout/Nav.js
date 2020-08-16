@@ -1,8 +1,10 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 
 const Nav = () => {
-	return (
+	const isUserLoggedIn = useSelector(({isUserLoggedIn}) => isUserLoggedIn);
+	return isUserLoggedIn ? (
 		<>
 			<NavLink exact to='/' activeClassName='active' className='navigation__item'>
 				<span>Home</span>
@@ -10,6 +12,12 @@ const Nav = () => {
 			<NavLink exact to='/profile' activeClassName='active' className='navigation__item'>
 				<span>Profile</span>
 			</NavLink>
+			<NavLink exact to='/campaigns/new' activeClassName='active' className='navigation__item'>
+				<span>Create</span>
+			</NavLink>
+		</>
+	) : (
+		<>
 			<NavLink exact to='/login' activeClassName='active' className='navigation__item'>
 				<span>Login</span>
 			</NavLink>
