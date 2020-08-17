@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,6 +8,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
 import Campaign from '../../../web3/campaign';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import web3 from '../../../web3/web3';
 
 const SingleCampaign = (props) => {
 	const address = window.location.href.split('/campaigns/')[1];
@@ -21,6 +24,9 @@ const SingleCampaign = (props) => {
 	const [donors, setDonors] = useState(0);
 	const [total, setTotal] = useState(0);
 	const [managerAddress, setManagerAddress] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
+	const [value, setValue] = useState('');
+	const [formLoading, setFormLoading] = useState(false);
 
 	async function getDetails() {
 		const summary = await campaign.methods.getSummary().call();
@@ -34,6 +40,29 @@ const SingleCampaign = (props) => {
 		setManagerAddress(summary[7]);
 		setLoading(false);
 	}
+
+	const onSubmit = async (event) => {
+		event.preventDefault();
+		setFormLoading(true);
+		setErrorMessage('');
+		const campaign = Campaign(address);
+		try {
+			await window.ethereum.enable();
+			const accounts = await web3.eth.getAccounts();
+			await campaign.methods.contribute().send({from: accounts[0], value: web3.utils.toWei(value, 'ether')});
+			setFormLoading(false);
+			alert('Successful');
+			window.location.reload();
+		} catch (err) {
+			if (err.message === 'MetaMask Tx Signature: User denied transaction signature.') {
+				setErrorMessage('You cancelled the transaction');
+			} else {
+				setErrorMessage('Oops! Something went wrong');
+				console.log(err.message);
+			}
+			setFormLoading(false);
+		}
+	};
 
 	useEffect(() => {
 		getDetails();
@@ -134,28 +163,59 @@ const SingleCampaign = (props) => {
 					<CardContent>
 						<div style={{textAlign: 'left'}}>
 							<Typography variant='body1' style={{marginBottom: 10}}>
-								Total Amount donated: {total} Eth
+								Total Amount donated: {web3.utils.fromWei(total, 'ether')} Eth
 							</Typography>
 							<Typography variant='body1' style={{marginBottom: 10}}>
-								Balance: {balance} Eth
+								Balance: {web3.utils.fromWei(balance, 'ether')} Eth
 							</Typography>
 						</div>
 					</CardContent>
 				</Card>
 			</Grid>
-			<Grid item xs={12} sm={12} md={6} lg={6} className=''>
+			<Grid item xs={12} sm={12} md={4} lg={4} className=''>
+				<Link to={`/campaigns/${address}/requests`}>
+					<Button
+						variant='contained'
+						color='primary'
+						style={{marginTop: 10, background: '#3f51b5', color: 'white'}}
+						size='small'
+					>
+						View Requests
+					</Button>
+				</Link>
+			</Grid>
+			<Grid item xs={12} sm={12} md={4} lg={4} className=''>
 				<div className='login_form_field'>
 					<TextField
 						id='amount'
-						label='Amount'
+						label='Amount (in Ether)'
 						type='tet'
 						variant='outlined'
 						fullWidth
 						size='small'
+						onChange={(event) => setValue(event.target.value)}
+						value={value}
 						InputProps={{style: {color: 'white', borderColor: 'white !important'}}}
 						InputLabelProps={{style: {color: 'white', border: 'white'}}}
 					/>
 				</div>
+				{errorMessage && (
+					<div>
+						<Typography variant='caption' style={{color: 'red'}}>
+							{errorMessage}
+						</Typography>
+					</div>
+				)}
+				<Button
+					variant='contained'
+					color='primary'
+					style={{marginTop: 10, background: '#3f51b5', color: 'white'}}
+					size='small'
+					type='submit'
+					onClick={onSubmit}
+				>
+					{formLoading ? <CircularProgress style={{color: 'white'}} /> : 'Contribute'}
+				</Button>
 			</Grid>
 		</Grid>
 	);
