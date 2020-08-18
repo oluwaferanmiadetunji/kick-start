@@ -11,7 +11,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import web3 from '../../../web3/web3';
 
-const SingleCampaign = (props) => {
+const SingleCampaign = () => {
 	const address = window.location.href.split('/campaigns/')[1];
 	const campaign = Campaign(address);
 
@@ -88,6 +88,16 @@ const SingleCampaign = (props) => {
 							<Typography variant='body1' style={{marginBottom: 10}}>
 								Description: {description}
 							</Typography>
+							<Link to={`/campaigns/${address}/requests`}>
+								<Button
+									variant='contained'
+									color='primary'
+									style={{marginTop: 10, background: '#3f51b5', color: 'white'}}
+									size='small'
+								>
+									View Requests
+								</Button>
+							</Link>
 						</div>
 					</CardContent>
 				</Card>
@@ -172,18 +182,7 @@ const SingleCampaign = (props) => {
 					</CardContent>
 				</Card>
 			</Grid>
-			<Grid item xs={12} sm={12} md={4} lg={4} className=''>
-				<Link to={`/campaigns/${address}/requests`}>
-					<Button
-						variant='contained'
-						color='primary'
-						style={{marginTop: 10, background: '#3f51b5', color: 'white'}}
-						size='small'
-					>
-						View Requests
-					</Button>
-				</Link>
-			</Grid>
+			<Grid item xs={12} sm={12} md={4} lg={4} className=''></Grid>
 			<Grid item xs={12} sm={12} md={4} lg={4} className=''>
 				<div className='login_form_field'>
 					<TextField

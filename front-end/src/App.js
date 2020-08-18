@@ -32,7 +32,9 @@ const middleware = [sagaMiddleware];
 const store = createStore(
 	persistedReducer,
 	// wrap all of them in a compose in order to wrap them as a single argument
-	compose(applyMiddleware(...middleware), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+	compose(applyMiddleware(...middleware)
+	, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+	)
 );
 
 const persistor = persistStore(store);
