@@ -43,7 +43,7 @@ const LandingPage = () => {
 									Address: {campaign}
 								</Typography>
 							</div>
-							<Button style={{background: 'red', color: 'white', marginTop: 10, textAlign: 'center'}} size='small'>
+							<Button style={{background: '#f50057', color: 'white', marginTop: 10, textAlign: 'center'}} size='small'>
 								<Link to={`/campaigns/${campaign}`}>
 									<KeyboardArrowRightIcon />
 								</Link>

@@ -84,13 +84,7 @@ function Form() {
 					</div>
 				)}
 
-				<Button
-					variant='contained'
-					color='primary'
-					style={{marginTop: 10, background: '#3f51b5', color: 'white'}}
-					size='small'
-					type='submit'
-				>
+				<Button variant='outlined' color='primary' style={{marginTop: 10}} size='small' type='submit'>
 					{loading ? <CircularProgress style={{color: 'white'}} /> : 'Create'}
 				</Button>
 			</form>

@@ -1,7 +1,7 @@
 body,
 html {
 	overflow: hidden;
-	background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)), url('../images/bg.jpg');
+	background: black;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -21,6 +21,6 @@ a {
 	border-color: #3f51b5;
 }
 .MuiPaper-root.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-elevation24.MuiPaper-rounded {
-	background: black;
+	background: rgba(0, 0, 0, 0.9);
 	color: white;
 }

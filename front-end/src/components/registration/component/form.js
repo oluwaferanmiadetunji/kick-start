@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 // import Material UI
 import TextField from '@material-ui/core/TextField';
@@ -9,9 +9,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 // import constants
-import { Gender } from './constants';
+import {Gender} from './constants';
 // import the redux actions
 import action from '../actions';
 
@@ -79,32 +79,32 @@ function Form() {
 
 		// check if name field is empty
 		if (name.trim() === '') {
-			setError({ name: 'You must enter a name!' });
+			setError({name: 'You must enter a name!'});
 		}
 
 		// check if email field is empty
 		else if (email.trim() === '') {
-			setError({ email: 'You must enter an email!' });
+			setError({email: 'You must enter an email!'});
 		}
 
 		// check if email is a valid email
 		else if (!email.match(re)) {
-			setError({ email: 'You must enter a valid email!' });
+			setError({email: 'You must enter a valid email!'});
 		}
 
 		// check if phone is empty
 		else if (phone.trim() === '') {
-			setError({ phone: 'You must enter a phone number!' });
+			setError({phone: 'You must enter a phone number!'});
 		}
 
 		// check if gender is empty
 		else if (gender.trim() === '') {
-			setError({ gender: 'You must select your gender!' });
+			setError({gender: 'You must select your gender!'});
 		}
 
 		// check if password is empty
 		else if (password.trim() === '') {
-			setError({ password: 'You must enter a password!' });
+			setError({password: 'You must enter a password!'});
 		}
 
 		// check if password length is at least 6 characters long
@@ -116,18 +116,18 @@ function Form() {
 
 		// check if confirm password is empty
 		else if (confirmPassword.trim() === '') {
-			setError({ confirmPassword: 'You must enter a password!' });
+			setError({confirmPassword: 'You must enter a password!'});
 		}
 
 		// check if password and confirm password match
 		else if (password !== confirmPassword) {
-			setError({ password: 'Passwords do not match!', confirmPassword: 'Passwords do not match!' });
+			setError({password: 'Passwords do not match!', confirmPassword: 'Passwords do not match!'});
 		}
 
 		// proceed with the action
 		else {
 			dispatch(action.registerLoading(true));
-			dispatch(action.registerUser({ name, email, phone, password, gender }));
+			dispatch(action.registerUser({name, email, phone, password, gender}));
 		}
 	};
 
@@ -153,8 +153,8 @@ function Form() {
 							variant='outlined'
 							fullWidth
 							size='small'
-							InputProps={{ style: { color: 'white', borderColor: 'white !important' } }}
-							InputLabelProps={{ style: { color: 'white', border: 'white' } }}
+							InputProps={{style: {color: 'white', borderColor: 'white !important'}}}
+							InputLabelProps={{style: {color: 'white', border: 'white'}}}
 							value={name}
 							onChange={handleNameChange}
 						/>
@@ -169,8 +169,8 @@ function Form() {
 							variant='outlined'
 							fullWidth
 							size='small'
-							InputProps={{ style: { color: 'white', borderColor: 'white !important' } }}
-							InputLabelProps={{ style: { color: 'white', border: 'white' } }}
+							InputProps={{style: {color: 'white', borderColor: 'white !important'}}}
+							InputLabelProps={{style: {color: 'white', border: 'white'}}}
 							value={email}
 							onChange={handleEmailChange}
 						/>
@@ -185,8 +185,8 @@ function Form() {
 							variant='outlined'
 							fullWidth
 							size='small'
-							InputProps={{ style: { color: 'white', borderColor: 'white !important' } }}
-							InputLabelProps={{ style: { color: 'white', border: 'white' } }}
+							InputProps={{style: {color: 'white', borderColor: 'white !important'}}}
+							InputLabelProps={{style: {color: 'white', border: 'white'}}}
 							value={phone}
 							onChange={handlePhoneNumberChange}
 						/>
@@ -204,8 +204,8 @@ function Form() {
 							variant='outlined'
 							fullWidth
 							size='small'
-							InputProps={{ style: { color: 'white', borderColor: 'white !important' } }}
-							InputLabelProps={{ style: { color: 'white', border: 'white' } }}
+							InputProps={{style: {color: 'white', borderColor: 'white !important'}}}
+							InputLabelProps={{style: {color: 'white', border: 'white'}}}
 						>
 							{Gender.map((option) => (
 								<MenuItem key={option.key} value={option.value}>
@@ -224,8 +224,8 @@ function Form() {
 							variant='outlined'
 							fullWidth
 							size='small'
-							InputProps={{ style: { color: 'white', borderColor: 'white !important' } }}
-							InputLabelProps={{ style: { color: 'white', border: 'white' } }}
+							InputProps={{style: {color: 'white', borderColor: 'white !important'}}}
+							InputLabelProps={{style: {color: 'white', border: 'white'}}}
 							value={password}
 							onChange={handlePasswordChange}
 						/>
@@ -240,8 +240,8 @@ function Form() {
 							variant='outlined'
 							fullWidth
 							size='small'
-							InputProps={{ style: { color: 'white', borderColor: 'white !important' } }}
-							InputLabelProps={{ style: { color: 'white', border: 'white' } }}
+							InputProps={{style: {color: 'white', borderColor: 'white !important'}}}
+							InputLabelProps={{style: {color: 'white', border: 'white'}}}
 							value={confirmPassword}
 							onChange={handleConfirmPasswordChange}
 						/>
@@ -249,35 +249,35 @@ function Form() {
 
 					{message && (
 						<div>
-							<Typography variant='caption' style={{ color: 'red' }}>
+							<Typography variant='caption' style={{color: '#f50057'}}>
 								{message}
 							</Typography>
 						</div>
 					)}
 
 					<Button
-						variant='contained'
+						variant='outlined'
 						color='primary'
-						style={{ marginTop: 10, background: '#3f51b5', color: 'white' }}
+						style={{marginTop: 10}}
 						size='small'
 						type='submit'
 						disabled={loading}
 					>
-						{loading ? <CircularProgress style={{ color: 'white' }} /> : 'Register'}
+						{loading ? <CircularProgress style={{color: 'white'}} /> : 'Register'}
 					</Button>
 					<div className='register_form_footer'>
 						<Typography>
 							Already have an account ?&nbsp;
-							<Link to='/login' style={{ color: 'red' }}>
+							<Link to='/login' style={{color: '#f50057'}}>
 								Click here
 							</Link>
 						</Typography>
-						<Typography>
+						{/* <Typography>
 							Forgot password ?&nbsp;
-							<Link to='/reset' style={{ color: 'red' }}>
+							<Link to='/reset' style={{color: '#f50057'}}>
 								Click here
 							</Link>
-						</Typography>
+						</Typography> */}
 					</div>
 				</form>
 			</div>

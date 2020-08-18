@@ -51,7 +51,6 @@ const SingleCampaign = () => {
 			const accounts = await web3.eth.getAccounts();
 			await campaign.methods.contribute().send({from: accounts[0], value: web3.utils.toWei(value, 'ether')});
 			setFormLoading(false);
-			alert('Successful');
 			window.location.reload();
 		} catch (err) {
 			if (err.message === 'MetaMask Tx Signature: User denied transaction signature.') {
@@ -89,12 +88,7 @@ const SingleCampaign = () => {
 								Description: {description}
 							</Typography>
 							<Link to={`/campaigns/${address}/requests`}>
-								<Button
-									variant='contained'
-									color='primary'
-									style={{marginTop: 10, background: '#3f51b5', color: 'white'}}
-									size='small'
-								>
+								<Button variant='outlined' color='primary' style={{marginTop: 10}} size='small'>
 									View Requests
 								</Button>
 							</Link>
@@ -205,14 +199,7 @@ const SingleCampaign = () => {
 						</Typography>
 					</div>
 				)}
-				<Button
-					variant='contained'
-					color='primary'
-					style={{marginTop: 10, background: '#3f51b5', color: 'white'}}
-					size='small'
-					type='submit'
-					onClick={onSubmit}
-				>
+				<Button variant='outlined' color='primary' style={{marginTop: 10}} size='small' type='submit' onClick={onSubmit}>
 					{formLoading ? <CircularProgress style={{color: 'white'}} /> : 'Contribute'}
 				</Button>
 			</Grid>

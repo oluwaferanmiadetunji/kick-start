@@ -57,7 +57,7 @@ export default function FormDialog({address}) {
 				Create Request
 			</Button>
 			<Dialog open={open} onClose={handleClose} aria-labelledby='form-dialog-title'>
-				<DialogTitle id='form-dialog-title'> Create A request </DialogTitle>
+				<DialogTitle id='form-dialog-title'> Create request </DialogTitle>
 				<DialogContent style={{width: '30vw'}}>
 					<div className='login_form_field'>
 						<TextField

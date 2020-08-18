@@ -9,11 +9,8 @@ const Nav = () => {
 			<NavLink exact to='/' activeClassName='active' className='navigation__item'>
 				<span>Home</span>
 			</NavLink>
-			<NavLink exact to='/profile' activeClassName='active' className='navigation__item'>
-				<span>Profile</span>
-			</NavLink>
 			<NavLink exact to='/campaigns/new' activeClassName='active' className='navigation__item'>
-				<span>Create</span>
+				<span>Create Campaign</span>
 			</NavLink>
 		</>
 	) : (

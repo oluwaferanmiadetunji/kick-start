@@ -25,13 +25,13 @@
 	font-size: 20px;
 }
 .active {
-	color: red;
+	color: #f50057;
 }
 .active::after {
 	content: '\00b0';
 }
 .navigation__item:hover {
-	color: red;
+	color: #f50057;
 }
 .component {
 	display: flex;

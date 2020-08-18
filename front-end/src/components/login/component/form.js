@@ -114,16 +114,16 @@ function Form() {
 
 					{message && (
 						<div>
-							<Typography variant='caption' style={{color: 'red'}}>
+							<Typography variant='caption' style={{color: '#f50057'}}>
 								{message}
 							</Typography>
 						</div>
 					)}
 
 					<Button
-						variant='contained'
+						variant='outlined'
 						color='primary'
-						style={{marginTop: 10, background: '#3f51b5', color: 'white'}}
+						style={{marginTop: 10}}
 						size='small'
 						type='submit'
 						disabled={loading}
@@ -133,13 +133,13 @@ function Form() {
 					<div className='login_form_footer'>
 						<Typography>
 							Don't have an account ?&nbsp;
-							<Link to='/register' style={{color: 'red'}}>
+							<Link to='/register' style={{color: '#f50057'}}>
 								Click here
 							</Link>
 						</Typography>
 						<Typography>
 							Forgot password ?&nbsp;
-							<Link to='/reset' style={{color: 'red'}}>
+							<Link to='/reset' style={{color: '#f50057'}}>
 								Click here
 							</Link>
 						</Typography>
